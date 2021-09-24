@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const authRoutes = require("./routes/auth.route");
 
 const app = express();
 
@@ -21,6 +22,7 @@ mongoose
   .catch((err) => console.log(err));
 
 // routes
+app.use(authRoutes);
 
 // 404
 app.use("/", (req, res) => {

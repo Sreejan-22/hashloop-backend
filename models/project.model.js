@@ -1,0 +1,56 @@
+const mongoose = require("mongoose");
+
+const TagSchema = new mongoose.Schema({
+  name: {
+    type: String,
+  },
+});
+
+const projectSchema = new mongoose.Schema(
+  {
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    author: {
+      type: String,
+      required: true,
+    },
+    projectName: {
+      type: String,
+      required: true,
+      unique: "This name has already been used",
+      trim: true,
+    },
+    details: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    tags: {
+      type: [TagSchema],
+    },
+    code: {
+      type: String,
+      required: true,
+      unique: "A project with this link already exists",
+      trim: true,
+    },
+    live: {
+      type: String,
+      required: true,
+      unique: "A project with this link already exists",
+      trim: true,
+    },
+    image: {
+      type: String,
+      unique: "A project with this image already exists",
+      trim: true,
+    },
+  },
+  { timestamps: true }
+);
+
+const Project = mongoose.model("project", projectSchema);
+module.exports = Project;

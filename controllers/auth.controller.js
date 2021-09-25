@@ -31,6 +31,7 @@ module.exports.signup = async (req, res) => {
       res.status(500).json({
         status: "serverError",
         message: "Oops!! Something went wrong!",
+        errorMessage: err,
       });
     } else {
       res.status(400).json({ status: "error", errors });
@@ -62,6 +63,7 @@ module.exports.login = async (req, res) => {
     res.status(500).json({
       status: "serverError",
       message: "Oops!! Something went wrong!",
+      errorMessage: err,
     });
   }
 };

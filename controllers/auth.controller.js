@@ -18,7 +18,7 @@ module.exports.signup = async (req, res) => {
     // after a new account is created, the user is logged into the website
     // so a token, to be sent to the frontend, has to be generated
     const token = createToken(newUser._id);
-    res.status(201).json({ status: "ok", user: newUser._id, token });
+    res.status(201).json({ status: "ok", user: user.username, token });
   } catch (err) {
     const errors = handleError(err);
 
@@ -47,10 +47,10 @@ module.exports.login = async (req, res) => {
       const auth = await bcrypt.compare(password, user.password);
       if (auth) {
         const token = createToken(user._id);
-        res.status(200).json({ status: "ok", user: user._id, token });
+        res.status(200).json({ status: "ok", user: user.username, token });
       } else {
         res
-          .status(400)
+          .status(403)
           .json({ status: "error", message: "Incorrect Password" });
       }
     } else {

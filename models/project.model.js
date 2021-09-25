@@ -1,11 +1,5 @@
 const mongoose = require("mongoose");
 
-const TagSchema = new mongoose.Schema({
-  name: {
-    type: String,
-  },
-});
-
 const projectSchema = new mongoose.Schema(
   {
     username: {
@@ -29,7 +23,7 @@ const projectSchema = new mongoose.Schema(
       trim: true,
     },
     tags: {
-      type: [TagSchema],
+      type: [String],
     },
     code: {
       type: String,

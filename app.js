@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const authRoutes = require("./routes/auth.route");
+const projectRoutes = require("./routes/project.route");
 
 const app = express();
 
@@ -23,6 +24,7 @@ mongoose
 
 // routes
 app.use(authRoutes);
+app.use(projectRoutes);
 
 // 404
 app.use("/", (req, res) => {

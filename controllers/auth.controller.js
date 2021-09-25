@@ -12,7 +12,7 @@ module.exports.signup = async (req, res) => {
 
     const saltRounds = 10;
     // auto generate a salt and hash
-    newUser.password = await bcrypt.hash(user.password, saltRounds);
+    user.password = await bcrypt.hash(user.password, saltRounds);
     const newUser = await user.save();
 
     // after a new account is created, the user is logged into the website
@@ -22,7 +22,12 @@ module.exports.signup = async (req, res) => {
   } catch (err) {
     const errors = handleError(err);
 
-    if (errors.email === "" && errors.password === "") {
+    if (
+      errors.name === "" &&
+      errors.email === "" &&
+      errors.username === "" &&
+      errors.password === ""
+    ) {
       res.status(500).json({
         status: "serverError",
         message: "Oops!! Something went wrong!",

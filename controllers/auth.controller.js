@@ -50,12 +50,12 @@ module.exports.login = async (req, res) => {
         res.status(200).json({ status: "ok", user: user.username, token });
       } else {
         res
-          .status(403)
+          .status(401)
           .json({ status: "error", message: "Incorrect Password" });
       }
     } else {
       res
-        .status(400)
+        .status(401)
         .json({ status: "error", message: "This email is not registered" });
     }
   } catch (err) {

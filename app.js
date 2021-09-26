@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const authRoutes = require("./routes/auth.route");
+const uploadRoutes = require("./routes/upload.route");
 const projectRoutes = require("./routes/project.route");
 
 const app = express();
@@ -24,6 +25,7 @@ mongoose
 
 // routes
 app.use(authRoutes);
+app.use(uploadRoutes);
 app.use(projectRoutes);
 
 // 404

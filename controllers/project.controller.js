@@ -1,8 +1,5 @@
 const Project = require("../models/project.model");
 
-// const getAllProjects = () => {};
-// const getOneProjectById = () => {};
-
 const createProject = async (req, res) => {
   try {
     // const { name, username } = req.user;

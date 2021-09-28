@@ -18,7 +18,7 @@ module.exports.signup = async (req, res) => {
     // after a new account is created, the user is logged into the website
     // so a token, to be sent to the frontend, has to be generated
     const token = createToken(newUser._id);
-    res.status(201).json({ status: "ok", user: user.username, token });
+    res.status(201).json({ success: "true", user: user.username, token });
   } catch (err) {
     const errors = handleError(err);
 
@@ -29,12 +29,12 @@ module.exports.signup = async (req, res) => {
       errors.password === ""
     ) {
       res.status(500).json({
-        status: "serverError",
+        success: "false",
         message: "Oops!! Something went wrong!",
         error: err,
       });
     } else {
-      res.status(400).json({ status: "error", errors });
+      res.status(400).json({ success: "false", errors });
     }
   }
 };
@@ -48,20 +48,20 @@ module.exports.login = async (req, res) => {
       const auth = await bcrypt.compare(password, user.password);
       if (auth) {
         const token = createToken(user._id);
-        res.status(200).json({ status: "ok", user: user.username, token });
+        res.status(200).json({ success: "true", user: user.username, token });
       } else {
         res
           .status(401)
-          .json({ status: "error", message: "Incorrect Password" });
+          .json({ success: "false", message: "Incorrect Password" });
       }
     } else {
       res
         .status(401)
-        .json({ status: "error", message: "This email is not registered" });
+        .json({ success: "false", message: "This email is not registered" });
     }
   } catch (err) {
     res.status(500).json({
-      status: "serverError",
+      success: "false",
       message: "Oops!! Something went wrong!",
       error: err,
     });

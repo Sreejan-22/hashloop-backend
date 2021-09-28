@@ -30,5 +30,5 @@ app.use(projectRoutes);
 
 // 404
 app.use("/", (req, res) => {
-  res.status(404).json({ status: "error", message: "404 page!! Not found!!" });
+  res.status(404).json({ success: false, message: "404 page!! Not found!!" });
 });

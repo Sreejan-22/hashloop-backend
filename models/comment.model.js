@@ -6,6 +6,7 @@ const commentSchema = new Schema(
     projectId: {
       type: Schema.Types.ObjectId,
       ref: "Project",
+      required: true,
     },
     username: {
       type: String,
@@ -14,6 +15,9 @@ const commentSchema = new Schema(
     author: {
       type: String,
       required: true,
+    },
+    shortbio: {
+      type: String,
     },
     comment: {
       type: String,
@@ -24,3 +28,4 @@ const commentSchema = new Schema(
 );
 
 const Comment = mongoose.model("comment", commentSchema);
+module.exports = Comment;

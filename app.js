@@ -5,6 +5,7 @@ const cors = require("cors");
 const authRoutes = require("./routes/auth.route");
 const uploadRoutes = require("./routes/upload.route");
 const projectRoutes = require("./routes/project.route");
+const commentRoutes = require("./routes/comment.route");
 
 const app = express();
 
@@ -27,6 +28,7 @@ mongoose
 app.use(authRoutes);
 app.use(uploadRoutes);
 app.use(projectRoutes);
+app.use(commentRoutes);
 
 // 404
 app.use("/", (req, res) => {

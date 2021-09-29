@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const { checkAuthentication } = require("../middlewares/auth.middleware");
 const {
   getAllProjects,
   getAllProjectsOfUser,
@@ -16,12 +17,12 @@ router.get("/projects", getAllProjects);
 router.get("/projects/:username", getAllProjectsOfUser);
 
 // create a new project
-router.post("/projects", createProject);
+router.post("/projects", checkAuthentication, createProject);
 
 // edit/update a project
-router.put("/projects/:id", updateProject);
+router.put("/projects/:id", checkAuthentication, updateProject);
 
 // delete a project
-router.delete("/projects/:id", deleteProject);
+router.delete("/projects/:id", checkAuthentication, deleteProject);
 
 module.exports = router;

@@ -4,4 +4,9 @@ const upload = require("../config/multer");
 
 const router = Router();
 
-router.post("/upload", upload.single("image"), uploadImageToCloudinary);
+router.post(
+  "/upload",
+  upload.single("image"),
+  checkAuthentication,
+  uploadImageToCloudinary
+);

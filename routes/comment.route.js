@@ -9,8 +9,8 @@ const {
 const router = Router();
 
 router.get("/comments/:projectId", getAllCommentsOfProject);
-router.post("/comments", addComment);
-router.delete("/comments/:id", deleteComment);
-router.put("/comments/:id", editComment);
+router.post("/comments", checkAuthentication, addComment);
+router.delete("/comments/:id", checkAuthentication, deleteComment);
+router.put("/comments/:id", checkAuthentication, editComment);
 
 module.exports = router;

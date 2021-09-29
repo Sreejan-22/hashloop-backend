@@ -49,9 +49,11 @@ const profileSchema = new Schema(
     },
     followers: {
       type: Number,
+      required: true,
     },
     following: {
       type: Number,
+      required: true,
     },
   },
   { timestamps: true }

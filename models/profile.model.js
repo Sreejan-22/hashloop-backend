@@ -21,6 +21,12 @@ const profileSchema = new Schema(
       unique: true,
       trim: true,
     },
+    pic: {
+      type: String,
+    },
+    cover: {
+      type: String,
+    },
     shortbio: {
       type: String,
     },

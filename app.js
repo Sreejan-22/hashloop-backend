@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const authRoutes = require("./routes/auth.route");
+const profileRoute = require("./routes/profile.route");
 const uploadRoutes = require("./routes/upload.route");
 const projectRoutes = require("./routes/project.route");
 const commentRoutes = require("./routes/comment.route");
@@ -26,6 +27,7 @@ mongoose
 
 // routes
 app.use(authRoutes);
+app.use(profileRoute);
 app.use(uploadRoutes);
 app.use(projectRoutes);
 app.use(commentRoutes);

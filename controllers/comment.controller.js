@@ -16,18 +16,20 @@ const getAllCommentsOfProject = async (req, res) => {
 
 const addComment = async (req, res) => {
   try {
-    const { projectId, username, author, shortbio, comment } = req.body;
+    const { projectId, username, author, shortbio, commentText } = req.body;
     const commentData = {
       projectId,
       username,
       author,
       shortbio,
-      comment,
+      commentText,
     };
-    const comment = await Comment.create(commentData);
-    res
-      .status(201)
-      .json({ success: true, message: "New comment created", comment });
+    const newComment = await Comment.create(commentData);
+    res.status(201).json({
+      success: true,
+      message: "New comment created",
+      comment: newComment,
+    });
   } catch (err) {
     res.status(400).json({
       success: false,

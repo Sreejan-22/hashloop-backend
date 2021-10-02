@@ -5,6 +5,7 @@ const {
   editComment,
   getAllCommentsOfProject,
 } = require("../controllers/comment.controller");
+const { checkAuthentication } = require("../middlewares/auth.middleware");
 
 const router = Router();
 

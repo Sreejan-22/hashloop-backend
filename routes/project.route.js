@@ -17,7 +17,8 @@ router.get("/projects", getAllProjects);
 router.get("/projects/:username", getAllProjectsOfUser);
 
 // create a new project
-router.post("/projects", checkAuthentication, createProject);
+// router.post("/projects", checkAuthentication, createProject);
+router.post("/projects", createProject);
 
 // edit/update a project
 router.put("/projects/:id", checkAuthentication, updateProject);

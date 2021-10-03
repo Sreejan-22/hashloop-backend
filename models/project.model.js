@@ -5,7 +5,7 @@ const projectSchema = new mongoose.Schema(
     username: {
       type: String,
       required: true,
-      unique: true,
+      ref: "User",
     },
     author: {
       type: String,
@@ -14,7 +14,6 @@ const projectSchema = new mongoose.Schema(
     projectName: {
       type: String,
       required: true,
-      unique: "This name has already been used",
       trim: true,
     },
     details: {

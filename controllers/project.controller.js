@@ -48,11 +48,11 @@ const getOneProjectById = async (req, res) => {
 
 const createProject = async (req, res) => {
   try {
-    const { name, username, projectName, details, tags, code, live, image } =
+    const { username, author, projectName, details, tags, code, live, image } =
       req.body;
     let projectData = {
       username,
-      author: name,
+      author,
       projectName,
       details,
       tags,

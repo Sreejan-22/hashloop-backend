@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const projectSchema = new mongoose.Schema(
+const projectSchema = new Schema(
   {
     username: {
       type: String,
       required: true,
-      ref: "User",
     },
     author: {
       type: String,

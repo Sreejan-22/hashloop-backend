@@ -15,8 +15,8 @@ const getAllProjects = async (req, res) => {
 
 const getAllProjectsOfUser = async (req, res) => {
   try {
-    const { userId } = req.params;
-    let allProjects = await Project.find({ userId });
+    const { username } = req.params;
+    let allProjects = await Project.find({ username });
     res.status(200).json({ success: true, projects: allProjects });
   } catch (err) {
     res.status(400).json({
@@ -68,7 +68,6 @@ const createProject = async (req, res) => {
       message: "New project submitted",
     });
   } catch (err) {
-    console.log(err);
     res.status(400).json({
       success: "false",
       message: "Failed to create project",

@@ -13,11 +13,11 @@ const router = Router();
 // create a new project
 router.post("/projects", checkAuthentication, createProject);
 
-// get all projects
-router.get("/projects", getAllProjects);
-
 // get all projects of a user
 router.get("/projects/:username", getAllProjectsOfUser);
+
+// get all projects
+router.get("/projects", getAllProjects);
 
 // edit/update a project
 router.put("/projects/:id", checkAuthentication, updateProject);

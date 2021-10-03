@@ -7,8 +7,8 @@ const router = Router();
 
 router.post(
   "/upload",
-  upload.single("image"),
   checkAuthentication,
+  upload.single("image"),
   uploadImageToCloudinary
 );
 

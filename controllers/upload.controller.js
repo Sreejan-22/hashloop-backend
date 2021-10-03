@@ -4,8 +4,9 @@ const cloudinary = require("../config/cloudinary");
 const uploadImageToCloudinary = async (req, res) => {
   try {
     // upload image to cloudinary
+    console.log(req.file);
     const result = await cloudinary.uploader.upload(req.file.path);
-    res.status(200).json({
+    res.status(201).json({
       success: true,
       message: "file uploaded to cloudinary successfully",
       imageUrl: result.secure_url,

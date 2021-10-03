@@ -32,7 +32,6 @@ const projectSchema = new Schema(
     },
     live: {
       type: String,
-      required: true,
       unique: "A project with this link already exists",
       trim: true,
     },

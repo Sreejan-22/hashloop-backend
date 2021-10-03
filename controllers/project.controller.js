@@ -79,11 +79,11 @@ const createProject = async (req, res) => {
 const updateProject = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, username, projectName, details, tags, code, live, image } =
+    const { username, author, projectName, details, tags, code, live, image } =
       req.body;
     const updateQuery = {
       username,
-      author: name,
+      author,
       projectName,
       details,
       tags,
@@ -95,7 +95,6 @@ const updateProject = async (req, res) => {
     res.status(200).json({
       success: true,
       message: "Project updated",
-      updatedProject: project,
     });
   } catch (err) {
     res.status(400).json({

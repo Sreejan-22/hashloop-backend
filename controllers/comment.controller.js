@@ -57,12 +57,11 @@ const deleteComment = async (req, res) => {
 const editComment = async (req, res) => {
   try {
     const { id } = req.params;
-    const { projectId, username, author, shortbio, comment } = req.body;
+    const { projectId, username, author, comment } = req.body;
     const commentData = {
       projectId,
       username,
       author,
-      shortbio,
       comment,
     };
     const editedComment = await Comment.findByIdAndUpdate(id, commentData);

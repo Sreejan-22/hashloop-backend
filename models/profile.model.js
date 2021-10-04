@@ -29,7 +29,7 @@ const profileSchema = new Schema(
     cover: {
       type: String,
     },
-    shortbio: {
+    bio: {
       type: String,
     },
     city: {

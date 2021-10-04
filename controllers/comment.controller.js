@@ -57,17 +57,15 @@ const deleteComment = async (req, res) => {
 const editComment = async (req, res) => {
   try {
     const { id } = req.params;
-    const { projectId, username, author, comment } = req.body;
+    const { projectId, username, author, commentText } = req.body;
     const commentData = {
       projectId,
       username,
       author,
-      comment,
+      commentText,
     };
-    const editedComment = await Comment.findByIdAndUpdate(id, commentData);
-    res
-      .status(200)
-      .json({ success: true, message: "Comment upated", editedComment });
+    const oldComment = await Comment.findByIdAndUpdate(id, commentData);
+    res.status(200).json({ success: true, message: "Comment updated" });
   } catch (err) {
     res.status(400).json({
       success: false,

@@ -16,12 +16,11 @@ const getAllCommentsOfProject = async (req, res) => {
 
 const addComment = async (req, res) => {
   try {
-    const { projectId, username, author, shortbio, commentText } = req.body;
+    const { projectId, username, author, commentText } = req.body;
     const commentData = {
       projectId,
       username,
       author,
-      shortbio,
       commentText,
     };
     const newComment = await Comment.create(commentData);

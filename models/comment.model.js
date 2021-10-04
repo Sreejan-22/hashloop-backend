@@ -16,10 +16,7 @@ const commentSchema = new Schema(
       type: String,
       required: true,
     },
-    shortbio: {
-      type: String,
-    },
-    comment: {
+    commentText: {
       type: String,
       required: true,
     },

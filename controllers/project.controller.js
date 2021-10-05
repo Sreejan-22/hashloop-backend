@@ -63,13 +63,13 @@ const createProject = async (req, res) => {
 
     const project = await Project.create(projectData);
     res.status(201).json({
-      success: "true",
+      success: true,
       data: project,
       message: "New project submitted",
     });
   } catch (err) {
     res.status(400).json({
-      success: "false",
+      success: false,
       message: "Failed to create project",
       error: err,
     });
@@ -98,7 +98,7 @@ const updateProject = async (req, res) => {
     });
   } catch (err) {
     res.status(400).json({
-      success: "false",
+      success: false,
       message: "Failed to update project",
       error: err,
     });
@@ -116,7 +116,7 @@ const deleteProject = async (req, res) => {
     });
   } catch (err) {
     res.status(400).json({
-      success: "false",
+      success: false,
       message: "Failed to delete project",
       error: err,
     });

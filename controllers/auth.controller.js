@@ -49,7 +49,12 @@ module.exports.login = async (req, res) => {
       const auth = await bcrypt.compare(password, user.password);
       if (auth) {
         const token = createToken(user._id);
-        res.status(200).json({ success: true, user: user.username, token });
+        const userData = {
+          name: user.name,
+          username: user.username,
+          email: user.email,
+        };
+        res.status(200).json({ success: true, user: userData, token });
       } else {
         res.status(401).json({ success: false, message: "Incorrect Password" });
       }

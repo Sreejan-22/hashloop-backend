@@ -30,6 +30,7 @@ module.exports.signup = async (req, res) => {
     ) {
       res.status(500).json({
         success: false,
+        serverError: true,
         message: "Oops!! Something went wrong!",
         error: err,
       });

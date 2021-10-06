@@ -66,6 +66,7 @@ module.exports.login = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       success: false,
+      serverError: true,
       message: "Oops!! Something went wrong!",
       error: err,
     });

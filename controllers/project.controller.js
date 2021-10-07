@@ -50,6 +50,7 @@ const createProject = async (req, res) => {
   try {
     const { username, author, projectName, details, tags, code, live, image } =
       req.body;
+
     let projectData = {
       username,
       author,
@@ -60,6 +61,10 @@ const createProject = async (req, res) => {
       live,
       image,
     };
+
+    if ("upvotes" in req.body) {
+      projectData = { ...projectData, upvotes: req.body.upvotes };
+    }
 
     const project = await Project.create(projectData);
     res.status(201).json({
@@ -91,6 +96,11 @@ const updateProject = async (req, res) => {
       live,
       image,
     };
+
+    if ("upvotes" in req.body) {
+      updateQuery = { ...updateQuery, upvotes: req.body.upvotes };
+    }
+
     const project = await Project.findByIdAndUpdate(id, updateQuery);
     res.status(200).json({
       success: true,
@@ -100,6 +110,27 @@ const updateProject = async (req, res) => {
     res.status(400).json({
       success: false,
       message: "Failed to update project",
+      error: err,
+    });
+  }
+};
+
+const upvoteCountChange = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { newCount } = req.body;
+
+    const project = await Project.findById(id);
+    project.upvotes = newCount;
+    await project.save();
+    res.status(200).json({
+      success: true,
+      message: "Upvote count updated",
+    });
+  } catch (err) {
+    res.status(400).json({
+      success: false,
+      message: "Failed to update upvote count",
       error: err,
     });
   }
@@ -129,5 +160,6 @@ module.exports = {
   getOneProjectById,
   createProject,
   updateProject,
+  upvoteCountChange,
   deleteProject,
 };

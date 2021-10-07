@@ -5,6 +5,7 @@ const {
   getAllProjectsOfUser,
   createProject,
   updateProject,
+  upvoteCountChange,
   deleteProject,
 } = require("../controllers/project.controller");
 
@@ -24,5 +25,7 @@ router.put("/projects/:id", checkAuthentication, updateProject);
 
 // delete a project
 router.delete("/projects/:id", checkAuthentication, deleteProject);
+
+router.put("/upvotes/:id", checkAuthentication, upvoteCountChange);
 
 module.exports = router;

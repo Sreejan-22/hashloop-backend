@@ -40,6 +40,10 @@ const projectSchema = new Schema(
       unique: "A project with this image already exists",
       trim: true,
     },
+    upvotes: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );

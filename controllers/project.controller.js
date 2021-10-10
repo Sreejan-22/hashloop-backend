@@ -66,28 +66,27 @@ const createProject = async (req, res) => {
 const updateProject = async (req, res) => {
   try {
     const { id } = req.params;
-    const { username, author, projectName, details, tags, code, live, image } =
-      req.body;
-    const updateQuery = {
-      username,
-      author,
-      projectName,
-      details,
-      tags,
-      code,
-      live,
-      image,
-    };
 
-    if ("upvotes" in req.body) {
-      updateQuery = { ...updateQuery, upvotes: req.body.upvotes };
+    const project = await Project.findById(id);
+
+    if (project) {
+      Object.entries(req.body).forEach(([key, value]) => {
+        if (value !== project[key]) {
+          project[key] = value;
+        }
+      });
+      await project.save();
+      res.status(200).json({
+        success: true,
+        message: "Project updated",
+      });
+    } else {
+      res.status(400).json({
+        success: false,
+        message: "This project does not exist",
+        error: err,
+      });
     }
-
-    const project = await Project.findByIdAndUpdate(id, updateQuery);
-    res.status(200).json({
-      success: true,
-      message: "Project updated",
-    });
   } catch (err) {
     res.status(400).json({
       success: false,

@@ -16,7 +16,7 @@ const getAllProjects = async (req, res) => {
 const getAllProjectsOfUser = async (req, res) => {
   try {
     const { username } = req.params;
-    let allProjects = await Project.find({ username });
+    let allProjects = await Project.find({ username }).sort({ createdAt: -1 });
     res.status(200).json({ success: true, projects: allProjects });
   } catch (err) {
     res.status(400).json({

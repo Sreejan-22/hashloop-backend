@@ -48,25 +48,7 @@ const getOneProjectById = async (req, res) => {
 
 const createProject = async (req, res) => {
   try {
-    const { username, author, projectName, details, tags, code, live, image } =
-      req.body;
-
-    let projectData = {
-      username,
-      author,
-      projectName,
-      details,
-      tags,
-      code,
-      live,
-      image,
-    };
-
-    if ("upvotes" in req.body) {
-      projectData = { ...projectData, upvotes: req.body.upvotes };
-    }
-
-    const project = await Project.create(projectData);
+    const project = await Project.create(req.body);
     res.status(201).json({
       success: true,
       data: project,

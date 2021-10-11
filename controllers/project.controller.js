@@ -102,13 +102,21 @@ const upvoteCountChange = async (req, res) => {
     const { newCount, upvoter } = req.body;
 
     const project = await Project.findById(id);
-    project.upvotes = newCount;
-    project.upvoters.push(upvoter);
-    await project.save();
-    res.status(200).json({
-      success: true,
-      message: "Upvote count updated",
-    });
+    if (project) {
+      project.upvotes = newCount;
+      project.upvoters.push(upvoter);
+      await project.save();
+      res.status(200).json({
+        success: true,
+        message: "Upvote count updated",
+      });
+    } else {
+      res.status(400).json({
+        success: false,
+        message: "Project not found",
+        error: err,
+      });
+    }
   } catch (err) {
     res.status(400).json({
       success: false,

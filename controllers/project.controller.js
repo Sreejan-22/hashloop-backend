@@ -99,10 +99,11 @@ const updateProject = async (req, res) => {
 const upvoteCountChange = async (req, res) => {
   try {
     const { id } = req.params;
-    const { newCount } = req.body;
+    const { newCount, upvoter } = req.body;
 
     const project = await Project.findById(id);
     project.upvotes = newCount;
+    project.upvoters.push(upvoter);
     await project.save();
     res.status(200).json({
       success: true,

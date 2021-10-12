@@ -46,6 +46,7 @@ const projectSchema = new Schema(
     },
     upvoters: {
       type: [String],
+      default: [],
     },
   },
   { timestamps: true }

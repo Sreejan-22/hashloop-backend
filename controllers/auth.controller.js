@@ -1,5 +1,6 @@
 require("dotenv").config();
 const User = require("../models/user.model");
+const Profile = require("../models/profile.model");
 const bcrypt = require("bcrypt");
 const { createToken } = require("../utils/createToken");
 const { handleError } = require("../utils/handleSignupErrors");
@@ -15,10 +16,16 @@ module.exports.signup = async (req, res) => {
     user.password = await bcrypt.hash(user.password, saltRounds);
     const newUser = await user.save();
 
+    const profile = await Profile.create({
+      profileId: newUser._id,
+      email,
+      username,
+    });
+
     // after a new account is created, the user is logged into the website
     // so a token, to be sent to the frontend, has to be generated
     const token = createToken(newUser._id);
-    res.status(201).json({ success: true, user: user.username, token });
+    res.status(201).json({ success: true, user: newUser, profile, token });
   } catch (err) {
     const errors = handleError(err);
 
@@ -49,12 +56,8 @@ module.exports.login = async (req, res) => {
       const auth = await bcrypt.compare(password, user.password);
       if (auth) {
         const token = createToken(user._id);
-        const userData = {
-          name: user.name,
-          username: user.username,
-          email: user.email,
-        };
-        res.status(200).json({ success: true, user: userData, token });
+
+        res.status(200).json({ success: true, user, token });
       } else {
         res.status(401).json({ success: false, message: "Incorrect Password" });
       }

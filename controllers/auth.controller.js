@@ -20,6 +20,7 @@ module.exports.signup = async (req, res) => {
       profileId: newUser._id,
       email,
       username,
+      name,
     });
 
     // after a new account is created, the user is logged into the website

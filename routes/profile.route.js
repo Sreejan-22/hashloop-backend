@@ -9,7 +9,7 @@ const { checkAuthentication } = require("../middlewares/auth.middleware");
 const router = Router();
 
 // get profile of a user
-router.get("/profile/:id", getProfileOfUser);
+router.get("/profile/:username", getProfileOfUser);
 
 // create a profile for a new user
 // initially after sign up, the username, email, name fields will get assigned their respective values

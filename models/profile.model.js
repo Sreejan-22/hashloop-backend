@@ -23,6 +23,11 @@ const profileSchema = new Schema(
       unique: true,
       trim: true,
     },
+    name: {
+      type: String,
+      required: [true, "Please enter your name"],
+      trim: true,
+    },
     pic: {
       type: String,
     },

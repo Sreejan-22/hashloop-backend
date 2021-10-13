@@ -57,8 +57,8 @@ module.exports.login = async (req, res) => {
       const auth = await bcrypt.compare(password, user.password);
       if (auth) {
         const token = createToken(user._id);
-
-        res.status(200).json({ success: true, user, token });
+        const profile = await Profile.findOne({ email });
+        res.status(200).json({ success: true, user, profile, token });
       } else {
         res.status(401).json({ success: false, message: "Incorrect Password" });
       }

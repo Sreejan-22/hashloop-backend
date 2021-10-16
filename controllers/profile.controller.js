@@ -32,12 +32,25 @@ const createProfile = async (req, res) => {
 const editProfile = async (req, res) => {
   try {
     const { id } = req.params;
-    const profileData = req.body;
-    const updatedProfile = await Profile.findByIdAndUpdate(id, profileData);
-    res.status(200).json({
-      success: true,
-      message: "Profile updated successfully",
-      updatedProfile,
+    const profile = await Profile.findById(id);
+
+    if (profile) {
+      Object.entries(req.body).forEach(([key, value]) => {
+        if (value !== project[key]) {
+          profile[key] = value;
+        }
+      });
+      await profile.save();
+      res.status(200).json({
+        success: true,
+        message: "Profile updated successfully",
+        updatedProfile,
+      });
+    }
+    res.status(400).json({
+      success: false,
+      message: "Profile not found",
+      error: err,
     });
   } catch (err) {
     res.status(400).json({

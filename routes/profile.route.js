@@ -17,5 +17,5 @@ router.get("/profile/:username", getProfileOfUser);
 router.post("/profile", checkAuthentication, createProfile);
 
 // edit profile
-router.put("/profile/:id", checkAuthentication, editProfile);
+router.put("/profile/:username", checkAuthentication, editProfile);
 module.exports = router;

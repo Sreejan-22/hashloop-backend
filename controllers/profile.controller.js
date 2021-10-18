@@ -31,27 +31,30 @@ const createProfile = async (req, res) => {
 
 const editProfile = async (req, res) => {
   try {
-    const { id } = req.params;
-    const profile = await Profile.findById(id);
+    const { username } = req.params;
+    const profile = await Profile.findOne({ username });
 
     if (profile) {
       Object.entries(req.body).forEach(([key, value]) => {
-        if (value !== project[key]) {
+        if (value !== profile[key]) {
           profile[key] = value;
         }
       });
+
       await profile.save();
+
       res.status(200).json({
         success: true,
         message: "Profile updated successfully",
-        updatedProfile,
+        updatedProfile: profile,
+      });
+    } else {
+      res.status(400).json({
+        success: false,
+        message: "Profile not found",
+        error: err,
       });
     }
-    res.status(400).json({
-      success: false,
-      message: "Profile not found",
-      error: err,
-    });
   } catch (err) {
     res.status(400).json({
       success: false,

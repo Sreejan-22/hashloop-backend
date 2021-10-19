@@ -3,6 +3,7 @@ const {
   editProfile,
   createProfile,
   getProfileOfUser,
+  editFollowCount,
 } = require("../controllers/profile.controller");
 const { checkAuthentication } = require("../middlewares/auth.middleware");
 
@@ -18,4 +19,8 @@ router.post("/profile", checkAuthentication, createProfile);
 
 // edit profile
 router.put("/profile/:username", checkAuthentication, editProfile);
+
+// edit follow count
+router.put("/follow/:username", checkAuthentication, editFollowCount);
+
 module.exports = router;

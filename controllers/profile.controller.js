@@ -64,8 +64,39 @@ const editProfile = async (req, res) => {
   }
 };
 
+const editFollowCount = async (req, res) => {
+  try {
+    const { username } = req.params;
+    const { type, follow } = req.body;
+    // type => follower/following, follow => true/false
+    const profile = await Profile.findOne({ username });
+    if (profile) {
+      profile[type] = follow ? profile[type] + 1 : profile[type] - 1;
+      await profile.save();
+      res.status(200).json({
+        success: true,
+        message: "Follow count updated successfully",
+        updatedProfile: profile,
+      });
+    } else {
+      res.status(400).json({
+        success: false,
+        message: "An error occured",
+        error: err,
+      });
+    }
+  } catch (err) {
+    res.status(400).json({
+      success: false,
+      message: "An error occured",
+      error: err,
+    });
+  }
+};
+
 module.exports = {
   getProfileOfUser,
   createProfile,
   editProfile,
+  editFollowCount,
 };

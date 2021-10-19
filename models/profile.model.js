@@ -61,12 +61,12 @@ const profileSchema = new Schema(
       type: String,
     },
     followers: {
-      type: Number,
-      default: 0,
+      type: [String],
+      default: [],
     },
     following: {
-      type: Number,
-      default: 0,
+      type: [String],
+      default: [],
     },
   },
   { timestamps: true }

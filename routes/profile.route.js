@@ -21,6 +21,6 @@ router.post("/profile", checkAuthentication, createProfile);
 router.put("/profile/:username", checkAuthentication, editProfile);
 
 // edit follow count
-router.put("/follow/:username", checkAuthentication, editFollowCount);
+router.put("/follow", checkAuthentication, editFollowCount);
 
 module.exports = router;

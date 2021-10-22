@@ -7,6 +7,7 @@ const {
   updateProject,
   upvoteCountChange,
   deleteProject,
+  getTrendingProjects,
 } = require("../controllers/project.controller");
 
 const router = Router();
@@ -19,6 +20,9 @@ router.get("/projects/:username", getAllProjectsOfUser);
 
 // get all projects
 router.get("/projects", getAllProjects);
+
+// get trending projects
+router.get("/trending", getTrendingProjects);
 
 // edit/update a project
 router.put("/projects/:id", checkAuthentication, updateProject);

@@ -46,6 +46,32 @@ const getOneProjectById = async (req, res) => {
   }
 };
 
+const getTrendingProjects = async (req, res) => {
+  try {
+    // most upvoted projects with the most recent ones shown first
+    const temp = await Project.find().sort({
+      upvotes: "desc",
+      createdAt: -1,
+    });
+
+    let trendingProjects = [];
+    if (temp && temp.length >= 3) {
+      trendingProjects = [...temp];
+      trendingProjects = trendingProjects.slice(0, 3);
+    } else if (temp) {
+      trendingProjects = temp;
+    }
+
+    res.status(200).json({ success: true, trendingProjects });
+  } catch (err) {
+    res.status(400).json({
+      success: false,
+      message: "Could not fetch trending projects",
+      error: err,
+    });
+  }
+};
+
 const createProject = async (req, res) => {
   try {
     const project = await Project.create(req.body);
@@ -148,6 +174,7 @@ module.exports = {
   getAllProjects,
   getAllProjectsOfUser,
   getOneProjectById,
+  getTrendingProjects,
   createProject,
   updateProject,
   upvoteCountChange,

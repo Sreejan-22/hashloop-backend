@@ -2,11 +2,15 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+
+require("./models/project.model");
+
 const authRoutes = require("./routes/auth.route");
 const profileRoute = require("./routes/profile.route");
 const uploadRoutes = require("./routes/upload.route");
 const projectRoutes = require("./routes/project.route");
 const commentRoutes = require("./routes/comment.route");
+const savedProjectRoutes = require("./routes/saved.route");
 
 const app = express();
 
@@ -45,6 +49,7 @@ app.use(profileRoute);
 app.use(uploadRoutes);
 app.use(projectRoutes);
 app.use(commentRoutes);
+app.use(savedProjectRoutes);
 
 // 404
 app.use("/", (req, res) => {

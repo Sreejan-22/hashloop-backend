@@ -5,6 +5,7 @@ const savedProjectSchema = new Schema(
   {
     projectId: {
       type: Schema.Types.ObjectId,
+      required: "true",
       ref: "projects",
     },
     username: {

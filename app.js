@@ -11,6 +11,7 @@ const uploadRoutes = require("./routes/upload.route");
 const projectRoutes = require("./routes/project.route");
 const commentRoutes = require("./routes/comment.route");
 const savedProjectRoutes = require("./routes/saved.route");
+const searchRoute = require("./routes/search.route");
 
 const app = express();
 
@@ -50,6 +51,7 @@ app.use(uploadRoutes);
 app.use(projectRoutes);
 app.use(commentRoutes);
 app.use(savedProjectRoutes);
+app.use(searchRoute);
 
 // 404
 app.use("/", (req, res) => {

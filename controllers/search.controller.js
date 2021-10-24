@@ -10,7 +10,7 @@ const searchProfiles = async (req, res) => {
     if (profilesFound?.length) {
       res.status(200).json({ success: true, profilesFound });
     } else {
-      res.status(400).json({ success: false, profilesFound: [] });
+      res.status(200).json({ success: true, profilesFound: [] });
     }
   } catch (err) {
     res.status(400).json({ success: false, error: err });

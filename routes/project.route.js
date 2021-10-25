@@ -3,11 +3,12 @@ const { checkAuthentication } = require("../middlewares/auth.middleware");
 const {
   getAllProjects,
   getAllProjectsOfUser,
+  getTrendingProjects,
+  getProjectsFromTag,
   createProject,
   updateProject,
   upvoteCountChange,
   deleteProject,
-  getTrendingProjects,
 } = require("../controllers/project.controller");
 
 const router = Router();
@@ -23,6 +24,9 @@ router.get("/projects", getAllProjects);
 
 // get trending projects
 router.get("/trending", getTrendingProjects);
+
+// get projects with a particular tag
+router.get("/tags/:tag", checkAuthentication, getProjectsFromTag);
 
 // edit/update a project
 router.put("/projects/:id", checkAuthentication, updateProject);

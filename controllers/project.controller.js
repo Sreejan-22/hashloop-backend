@@ -72,6 +72,24 @@ const getTrendingProjects = async (req, res) => {
   }
 };
 
+const getProjectsFromTag = async (req, res) => {
+  try {
+    const { tag } = req.params;
+    const projects = await Project.find({ tags: tag });
+    if (projects) {
+      res.status(200).json({ success: true, projects });
+    } else {
+      res.status(200).json({ success: true, projects: [] });
+    }
+  } catch (err) {
+    res.status(400).json({
+      success: false,
+      message: "Failed to fetch projects with this tag",
+      error: err,
+    });
+  }
+};
+
 const createProject = async (req, res) => {
   try {
     const project = await Project.create(req.body);
@@ -175,6 +193,7 @@ module.exports = {
   getAllProjectsOfUser,
   getOneProjectById,
   getTrendingProjects,
+  getProjectsFromTag,
   createProject,
   updateProject,
   upvoteCountChange,

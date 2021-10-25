@@ -1,8 +1,11 @@
 const Project = require("../models/project.model");
+const Profile = require("../models/profile.model");
 
 const getAllProjects = async (req, res) => {
   try {
-    const allProjects = await Project.find().sort({ createdAt: -1 });
+    const allProjects = await Project.find()
+      .sort({ createdAt: -1 })
+      .populate({ path: "authorId", model: Profile });
     res.status(200).json({ success: true, projects: allProjects });
   } catch (err) {
     res.status(400).json({
@@ -16,7 +19,9 @@ const getAllProjects = async (req, res) => {
 const getAllProjectsOfUser = async (req, res) => {
   try {
     const { username } = req.params;
-    let allProjects = await Project.find({ username }).sort({ createdAt: -1 });
+    let allProjects = await Project.find({ username })
+      .sort({ createdAt: -1 })
+      .populate({ path: "authorId", model: Profile });
     res.status(200).json({ success: true, projects: allProjects });
   } catch (err) {
     res.status(400).json({
@@ -30,7 +35,10 @@ const getAllProjectsOfUser = async (req, res) => {
 const getOneProjectById = async (req, res) => {
   try {
     const { id } = req.params;
-    const project = await Project.findById(id);
+    const project = await Project.findById(id).populate({
+      path: "authorId",
+      model: Profile,
+    });
     if (project) {
       res.status(200).json({ success: true, project });
     } else {
@@ -49,10 +57,12 @@ const getOneProjectById = async (req, res) => {
 const getTrendingProjects = async (req, res) => {
   try {
     // most upvoted projects with the most recent ones shown first
-    const temp = await Project.find().sort({
-      upvotes: "desc",
-      createdAt: -1,
-    });
+    const temp = await Project.find()
+      .sort({
+        upvotes: "desc",
+        createdAt: -1,
+      })
+      .populate({ path: "authorId", model: Profile });
 
     let trendingProjects = [];
     if (temp && temp.length >= 3) {
@@ -75,7 +85,10 @@ const getTrendingProjects = async (req, res) => {
 const getProjectsFromTag = async (req, res) => {
   try {
     const { tag } = req.params;
-    const projects = await Project.find({ tags: tag });
+    const projects = await Project.find({ tags: tag }).populate({
+      path: "authorId",
+      model: Profile,
+    });
     if (projects) {
       res.status(200).json({ success: true, projects });
     } else {

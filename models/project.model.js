@@ -3,6 +3,11 @@ const Schema = mongoose.Schema;
 
 const projectSchema = new Schema(
   {
+    authorId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: "profiles",
+    },
     username: {
       type: String,
       required: true,

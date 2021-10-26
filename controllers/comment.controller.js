@@ -1,9 +1,12 @@
 const Comment = require("../models/comment.model");
+const Profile = require("../models/profile.model");
 
 const getAllCommentsOfProject = async (req, res) => {
   try {
     const { projectId } = req.params;
-    const comments = await Comment.find({ projectId });
+    const comments = await Comment.find({ projectId })
+      .sort({ createdAt: -1 })
+      .populate({ path: "authorId", model: Profile });
     res.status(200).json({ success: true, comments });
   } catch (err) {
     res.status(400).json({
@@ -16,9 +19,10 @@ const getAllCommentsOfProject = async (req, res) => {
 
 const addComment = async (req, res) => {
   try {
-    const { projectId, username, author, commentText } = req.body;
+    const { projectId, authorId, username, author, commentText } = req.body;
     const commentData = {
       projectId,
+      authorId,
       username,
       author,
       commentText,
@@ -60,6 +64,7 @@ const editComment = async (req, res) => {
     const { projectId, username, author, commentText } = req.body;
     const commentData = {
       projectId,
+      authorId,
       username,
       author,
       commentText,

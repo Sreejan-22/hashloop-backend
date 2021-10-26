@@ -8,6 +8,11 @@ const commentSchema = new Schema(
       ref: "Project",
       required: true,
     },
+    authorId: {
+      type: Schema.Types.ObjectId,
+      ref: "profiles",
+      required: true,
+    },
     username: {
       type: String,
       required: true,

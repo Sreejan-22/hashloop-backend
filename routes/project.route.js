@@ -26,7 +26,7 @@ router.get("/projects", getAllProjects);
 router.get("/trending", getTrendingProjects);
 
 // get projects with a particular tag
-router.get("/tags/:tag", checkAuthentication, getProjectsFromTag);
+router.get("/tags/:tag", getProjectsFromTag);
 
 // edit/update a project
 router.put("/projects/:id", checkAuthentication, updateProject);

@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: [true, "Please enter an email"],
-    unique: "This username is already taken",
+    unique: true,
     trim: true,
     validate: [isEmail, "Please enter a valid email"],
   },
@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
     required: [true, "Please enter a username"],
     unique: true,
     trim: true,
-    minLength: [2, "Username should be atleast 2 character long"],
+    minLength: [2, "Username should be atleast 2 characters long"],
   },
   password: {
     type: String,

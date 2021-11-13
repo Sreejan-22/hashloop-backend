@@ -15,7 +15,7 @@ const handleError = (err) => {
   // errors due to duplicate
   if (err.code === 11000) {
     if ("email" in err.keyPattern)
-      clientError.email = "This email already exists";
+      clientError.email = "An account with this email already exists";
     if ("username" in err.keyPattern)
       clientError.username = "This username has already been taken";
   }

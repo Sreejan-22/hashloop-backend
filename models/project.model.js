@@ -32,17 +32,17 @@ const projectSchema = new Schema(
     code: {
       type: String,
       required: true,
-      unique: "A project with this link already exists",
+      // unique: "A project with this link already exists",
       trim: true,
     },
     live: {
       type: String,
-      unique: "A project with this link already exists",
+      // unique: "A project with this link already exists",
       trim: true,
     },
     image: {
       type: String,
-      unique: "A project with this image already exists",
+      // unique: "A project with this image already exists",
       trim: true,
     },
     upvotes: {

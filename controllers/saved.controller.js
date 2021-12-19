@@ -30,7 +30,6 @@ const getSavedProjectsOfUser = async (req, res) => {
       res.status(200).json({ success: true, savedProjects: [] });
     }
   } catch (err) {
-    console.log(err);
     res.status(400).json({
       success: false,
       message: "Failed to bookmark project",
@@ -39,7 +38,27 @@ const getSavedProjectsOfUser = async (req, res) => {
   }
 };
 
+const unsaveProject = async (req, res) => {
+  try {
+    const { username, projectId } = req.params;
+    const removedProject = await Saved.findOneAndDelete({
+      username,
+      projectId,
+    });
+    res
+      .status(200)
+      .json({ success: true, message: "Project removed from bookmarks" });
+  } catch (err) {
+    res.status(400).json({
+      success: false,
+      message: "Failed to remove project from bookmarks",
+      error: err,
+    });
+  }
+};
+
 module.exports = {
   saveOneProject,
   getSavedProjectsOfUser,
+  unsaveProject,
 };

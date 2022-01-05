@@ -91,6 +91,8 @@ const editFollowCount = async (req, res) => {
       res.status(200).json({
         success: true,
         message: "Follow count updated successfully",
+        personProfile,
+        followerProfile,
       });
     } else {
       res.status(400).json({

@@ -165,6 +165,7 @@ const upvoteCountChange = async (req, res) => {
       await project.save();
       res.status(200).json({
         success: true,
+        updatedProject: project,
         message: "Upvote count updated",
       });
     } else {

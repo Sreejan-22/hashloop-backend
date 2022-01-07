@@ -8,7 +8,7 @@ const {
 
 const router = Router();
 
-router.post("/saved/:projectId", checkAuthentication, saveOneProject);
+router.post("/saved/:username/:projectId", checkAuthentication, saveOneProject);
 router.get("/saved/:username", checkAuthentication, getSavedProjectsOfUser);
 router.delete(
   "/saved/:username/:projectId",

@@ -3,14 +3,16 @@ const Project = require("../models/project.model");
 
 const saveOneProject = async (req, res) => {
   try {
-    const { projectId } = req.params;
-    const { username } = req.body;
+    const { projectId, username } = req.params;
 
     const newSavedProject = await Saved.create({
       projectId,
       username,
     });
-    res.status(201).json({ success: true, message: "Project saved" });
+
+    res
+      .status(201)
+      .json({ success: true, message: "Project saved", newSavedProject });
   } catch (err) {
     res
       .status(400)

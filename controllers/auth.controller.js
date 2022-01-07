@@ -1,6 +1,7 @@
 require("dotenv").config();
 const User = require("../models/user.model");
 const Profile = require("../models/profile.model");
+const Saved = require("../models/saved.model");
 const bcrypt = require("bcrypt");
 const { createToken } = require("../utils/createToken");
 const { handleError } = require("../utils/handleSignupErrors");
@@ -26,7 +27,13 @@ module.exports.signup = async (req, res) => {
     // after a new account is created, the user is logged into the website
     // so a token, to be sent to the frontend, has to be generated
     const token = createToken(newUser._id);
-    res.status(201).json({ success: true, user: newUser, profile, token });
+    res.status(201).json({
+      success: true,
+      user: newUser,
+      profile,
+      token,
+      savedProjects: [],
+    });
   } catch (err) {
     const errors = handleError(err);
 
@@ -58,7 +65,19 @@ module.exports.login = async (req, res) => {
       if (auth) {
         const token = createToken(user._id);
         const profile = await Profile.findOne({ email });
-        res.status(200).json({ success: true, user, profile, token });
+        let savedProjects = await Saved.find({
+          username: profile.username,
+        }).sort({
+          createdAt: -1,
+        });
+
+        if (!savedProjects) {
+          savedProjects = [];
+        }
+
+        res
+          .status(200)
+          .json({ success: true, user, profile, token, savedProjects });
       } else {
         res.status(401).json({ success: false, message: "Incorrect Password" });
       }
@@ -68,6 +87,7 @@ module.exports.login = async (req, res) => {
         .json({ success: false, message: "This email is not registered" });
     }
   } catch (err) {
+    console.log(err);
     res.status(500).json({
       success: false,
       serverError: true,
